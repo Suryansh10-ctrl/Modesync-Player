@@ -7,13 +7,15 @@
   background: linear-gradient(135deg, #1f2937, #111827);
   color: #f9fafb;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  max-width: 720px;
-  margin: 1rem auto;
+  width: 100%;
+  max-width: 1000px;
+  height: 210px;
+  margin: 0.25rem auto;
 }
 
 .player-poster {
-  width: 120px;
-  height: 120px;
+  width: 170px;
+  height: 170px;
   object-fit: cover;
   border-radius: 0.75rem;
 }
@@ -34,7 +36,7 @@
 
 .player-progress {
   width: 100%;
-  accent-color: #38bdf8;
+  accent-color: #2b8fba;
   cursor: pointer;
 }
 
@@ -60,11 +62,11 @@
   background: #374151;
   color: #f9fafb;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: 0.2s;
 
   &:hover {
     transform: translateY(-1px);
-    background: #4b5563;
+    background: #0762e2;
   }
 }
 
@@ -79,4 +81,83 @@
   padding: 0.45rem 0.75rem;
   background: #e2e8f0;
   color: #111827;
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media (max-width: 768px) {
+  .player-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    max-width: 95%;
+  }
+
+  .player-poster {
+    width: 150px;
+    height: 150px;
+  }
+
+  .player-main {
+    width: 100%;
+  }
+
+  .player-controls {
+    justify-content: center;
+  }
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width: 480px) {
+  .player-card {
+    padding: 0.8rem;
+    border-radius: 12px;
+    gap: 0.8rem;
+    margin: 2.5rem ;
+  }
+
+  .player-poster {
+    width: 150px;
+    height: 150px;
+  }
+
+  .player-title {
+    font-size: 1rem;
+  }
+
+  .player-meta {
+    font-size: 0.85rem;
+  }
+
+  .player-controls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+
+  .player-btn,
+  .player-select {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.7rem;
+  }
+
+  .player-btn--primary {
+    grid-column: span 2;
+  }
+
+  .player-progress {
+    margin: 0.5rem 0;
+  }
+
+  .player-time-row {
+    font-size: 0.8rem;
+  }
 }

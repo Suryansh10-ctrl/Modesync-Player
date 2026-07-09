@@ -1,17 +1,42 @@
-import { createContext } from "react";
-import { useState } from "react";
-
+import { createContext, useEffect, useState } from "react";
+import { getMe } from "./services/auth.api";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-
     const [user, setUser] = useState(null);
-    const [loading, setloading] = useState(false);
+    const [loading, setloading] = useState(true);
 
-    return(
-        <AuthContext.Provider value={{user, setUser, loading, setloading}}>
+    useEffect(() => {
+        let isActive = true;
+
+        async function restoreSession() {
+            try {
+                const data = await getMe();
+                if (isActive) {
+                    setUser(data?.user ?? null);
+                }
+            } catch (error) {
+                if (isActive) {
+                    setUser(null);
+                }
+            } finally {
+                if (isActive) {
+                    setloading(false);
+                }
+            }
+        }
+
+        restoreSession();
+
+        return () => {
+            isActive = false;
+        };
+    }, []);
+
+    return (
+        <AuthContext.Provider value={{ user, setUser, loading, setloading }}>
             {children}
         </AuthContext.Provider>
-    )
-}
+    );
+};

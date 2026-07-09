@@ -1,0 +1,113 @@
+.home-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+.home-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.home-sidebar {
+  width: 320px;
+  max-width: 32vw;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.mood-playlist-card {
+  height: 86vh;
+  width: 500px;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #1f2937, #111827);
+  color: #f9fafb;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mood-playlist-header {
+  margin-bottom: 0.8rem;
+}
+
+.mood-playlist-label {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #f59e0b;
+  font-size: 0.78rem;
+}
+
+.mood-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.mood-chip {
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid #4b5563;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.mood-chip.active {
+  background: #f59e0b;
+  color: #111827;
+  border-color: #f59e0b;
+}
+
+.playlist-track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  overflow-y: auto;
+  padding-right: 0.3rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.playlist-track-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  min-height: 56px;
+}
+
+.playlist-track-item > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.playlist-track-item h4,
+.playlist-track-item p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.playlist-track-item button {
+  padding: 0.4rem 0.7rem;
+  border: none;
+  border-radius: 6px;
+  background: #dd4200;
+  color: white;
+  cursor: pointer;
+}

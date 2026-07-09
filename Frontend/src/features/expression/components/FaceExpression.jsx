@@ -4,6 +4,7 @@ import {
     FaceLandmarker,
     FilesetResolver,
 } from "@mediapipe/tasks-vision";
+import '../style/FaceExpression.scss'
 
 export default function FaceExpression({ onClick = () => { } }) {
     const videoRef = useRef(null);
@@ -46,28 +47,17 @@ export default function FaceExpression({ onClick = () => { } }) {
     }
 
     return (
-        <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "20px",
-            }}
-        >
+        <div className="face-expression">
             <video
+                className="video"
                 ref={videoRef}
                 autoPlay
                 muted
                 playsInline
-                style={{
-                    width: "500px",
-                    borderRadius: "12px",
-                    transform: "scaleX(-1)",
-                }}
             />
 
             <h2>{expression}</h2>
-            <button style={{ backgroundColor: "green", paddingInline: "1rem", paddingBlock: "0.75rem", border: "none", borderRadius: "0.5rem" }} onClick={handleClick}
+            <button className="btn" onClick={handleClick}
             >Detect Expression</button>
         </div >
     );
