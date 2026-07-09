@@ -3,25 +3,27 @@
   gap: 1.5rem;
   align-items: flex-start;
   padding: 1rem;
+  flex-wrap: wrap;
 }
 
 .home-main-content {
-  flex: 1;
+  flex: 1 1 320px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
 .home-sidebar {
-  width: 320px;
-  max-width: 32vw;
+  width: min(320px, 100%);
+  max-width: 100%;
   flex-shrink: 0;
   align-self: stretch;
 }
 
 .mood-playlist-card {
   height: 86vh;
-  width: 500px;
+  width: 100%;
   max-width: 100%;
   overflow: hidden;
   border-radius: 1rem;
