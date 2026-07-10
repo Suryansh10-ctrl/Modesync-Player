@@ -38,10 +38,18 @@ async function registerController(req,res){
         }
     )
 
-    res.cookie("token", token)
+    const cookieOptions = {
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        path: '/'
+    }
+
+    res.cookie("token", token, cookieOptions)
 
     res.status(201).json({
         message: "user registered successfully",
+        token,
         user: {
             id: user._id,
             username: user.username,
@@ -85,10 +93,18 @@ async function loginController(req,res){
         }
     )
 
-    res.cookie("token", token);
+    const cookieOptions = {
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        path: '/'
+    }
+
+    res.cookie("token", token, cookieOptions);
 
     return res.status(200).json({
         message: "user logged in successfully",
+        token,
         user: {
             id: user._id,
             username: user.username,
