@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const api = axios.create({
-    baseURL: "https://modesync-player.onrender.com/",
+    baseURL: "https://modesync-player.onrender.com",
     withCredentials: true
 })
 
