@@ -8,8 +8,12 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   async function onLogout() {
-    await handleLogout();
-    navigate('/login');
+    try {
+      await handleLogout();
+      navigate('/login');
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

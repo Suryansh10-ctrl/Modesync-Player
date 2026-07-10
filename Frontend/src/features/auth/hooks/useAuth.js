@@ -4,14 +4,22 @@ import { AuthContext } from "../auth.context";
 
 export const useAuth = () => {
     const context = useContext(AuthContext)
-    const {user,setUser,loading,setloading} = context;
+    const {user,setUser,loading,setloading,showAlert,alertMessage,alertType,clearAlertMessage} = context;
+
+    function getErrorMessage(error, fallbackMessage) {
+        return error?.response?.data?.message || error?.message || fallbackMessage
+    }
 
     async function handleRegister({email,password,username}){
         setloading(true)
         try {
             const data = await register({email,password,username})
             setUser(data.user)
+            showAlert('Account created successfully', 'success')
             return data
+        } catch (error) {
+            showAlert(getErrorMessage(error, 'Registration failed'), 'error')
+            throw error
         } finally {
             setloading(false)
         }
@@ -22,7 +30,11 @@ export const useAuth = () => {
         try {
             const data = await login({email,password})
             setUser(data.user)
+            showAlert('Login successful', 'success')
             return data
+        } catch (error) {
+            showAlert(getErrorMessage(error, 'Invalid email or password'), 'error')
+            throw error
         } finally {
             setloading(false)
         }
@@ -41,10 +53,15 @@ export const useAuth = () => {
 
     async function handleLogout(){
         setloading(true)
+        setUser(null)
+        showAlert('Logged out successfully', 'success')
+
         try {
             const data = await logout()
-            setUser(null)
             return data
+        } catch (error) {
+            showAlert(getErrorMessage(error, 'Logout failed'), 'error')
+            throw error
         } finally {
             setloading(false)
         }
@@ -54,6 +71,9 @@ export const useAuth = () => {
     return ({
         user,
         loading,
+        alertMessage,
+        alertType,
+        clearAlertMessage,
         handleRegister,
         handleLogin,
         handlegetMe,

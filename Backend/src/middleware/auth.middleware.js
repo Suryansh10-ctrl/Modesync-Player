@@ -4,7 +4,7 @@ const redis = require('../config/cache')
 
 
 async function authUser(req,res,next){
-    const token = req.cookies.token;
+    const token = req.cookies?.token;
 
     if(!token){
         return res.status(401).json({
@@ -12,8 +12,13 @@ async function authUser(req,res,next){
         })
     }
 
-    const isTokenBlacklisted = await redis.get(token);
+    let isTokenBlacklisted = false;
 
+    try {
+        isTokenBlacklisted = Boolean(await redis.get(token));
+    } catch (error) {
+        console.error("Redis auth check failed:", error);
+    }
 
     if(isTokenBlacklisted){
         return res.status(401).json({

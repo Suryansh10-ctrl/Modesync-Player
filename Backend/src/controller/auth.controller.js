@@ -111,22 +111,26 @@ async function getMecontroller(req,res){
 }
 
 async function logoutController(req,res){
-    
-    const token = req.cookies.token;
-    
-    res.clearCookie("token")
-    
-    await redis.set(token, Date.now().toString())
+    const token = req.cookies?.token;
 
-    await blacklistModel.create({
-        token
+    res.clearCookie("token", {
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === 'production'
     })
 
-    res.status(200).json({
+    if (token) {
+        try {
+            await redis.set(token, Date.now().toString())
+            await blacklistModel.create({ token })
+        } catch (error) {
+            console.error("Logout blacklist error:", error)
+        }
+    }
+
+    return res.status(200).json({
         message: "user logged out successfully"
     })
-
-
 }
 module.exports = {
     registerController,

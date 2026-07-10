@@ -17,8 +17,12 @@ const Register = () => {
 
   async function handleSubmit(e){
     e.preventDefault()
-    await handleRegister({email,password,username})
-    navigate("/")
+    try {
+      await handleRegister({email,password,username})
+      navigate("/")
+    } catch (error) {
+      console.error(error)
+    }
   }
   return (
     <main className="register-page">
@@ -42,7 +46,7 @@ const Register = () => {
           label="password" placeholder="Enter your password: " />
 
 
-          <button className='button' type="submit">Register</button>
+          <button className='button' type="submit" disabled={loading}>Register</button>
 
           <p>Already have an account? <Link to="/login">Login here</Link></p>
 

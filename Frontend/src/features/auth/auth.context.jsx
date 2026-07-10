@@ -6,6 +6,18 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setloading] = useState(true);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState('success');
+
+    const showAlert = (message, type = 'success') => {
+        setAlertMessage(message);
+        setAlertType(type);
+    };
+
+    const clearAlertMessage = () => {
+        setAlertMessage('');
+        setAlertType('success');
+    };
 
     useEffect(() => {
         let isActive = true;
@@ -35,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, setUser, loading, setloading }}>
+        <AuthContext.Provider value={{ user, setUser, loading, setloading, alertMessage, alertType, showAlert, clearAlertMessage }}>
             {children}
         </AuthContext.Provider>
     );
